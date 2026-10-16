@@ -1,0 +1,21 @@
+diff --git a/src/syntax.c b/src/syntax.c
+index 7649abb..fdafcbd 100644
+--- a/src/syntax.c
++++ b/src/syntax.c
+@@ -1110,9 +1110,14 @@ DEFUN ("char-syntax", Fchar_syntax, Schar_syntax, 1,
+ {
+   CHECK_CHARACTER (character);
+   int char_int = XFIXNAT (character);
+-  SETUP_BUFFER_SYNTAX_TABLE ();
+   if (NILP (BVAR (current_buffer, enable_multibyte_characters)))
+-    char_int = make_char_multibyte (char_int);
++    {
++      if (!SINGLE_BYTE_CHAR_P (char_int))
++        error ("Multibyte character %c has no syntax in a unibyte buffer",
++               char_int);
++      char_int = make_char_multibyte (char_int);
++    }
++  SETUP_BUFFER_SYNTAX_TABLE ();
+   return make_fixnum (syntax_code_spec[SYNTAX (char_int)]);
+ }
+
