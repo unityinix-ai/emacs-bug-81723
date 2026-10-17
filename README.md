@@ -31,10 +31,10 @@ Full report: [BUG-REPORT.md](BUG-REPORT.md)
    - per-buffer decision cache,
    - automatic opt-out above 50KB.
 
-   *(ships with the full fix package — being added)*
+   *(not included — this file was not present in the filed fix
+   materials, so it is not shipped here; the C patch above is the
+   complete fix as filed)*
 
 ## Usage
 
-Apply the patch against a current Emacs tree, or load the elisp
-workaround with `(require 'elisp-fontify-fix)` and enable
-`elisp-fontify-fix-mode`.
+Apply the patch against a current Emacs tree.
